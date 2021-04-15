@@ -28,7 +28,7 @@ if (process.env.FAKE_SENSOR) {
   });
 } else {
   //DHT 22, pin 4
-  sensor.setMaxRetries(10);
+  sensor.setMaxRetries(5);
   sensor.initialize(22, 4);
 }
 
@@ -74,7 +74,7 @@ const readOnce = () => {
             `humidity: ${humidity.toFixed(1)}%`
         );
       }
-      resolve({ temperature, humidity });
+      resolve({ temperature, humidity, err });
     });
 
     // sensor.read()
