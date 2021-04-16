@@ -5,7 +5,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var readOnce = require("./senseDHT").readOnce;
+var readOnce = require("./senseBME").readOnce;
 
 var indexRouter = require("./routes/index");
 

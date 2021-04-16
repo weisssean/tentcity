@@ -2,7 +2,7 @@
  * Created Date: Tuesday April 13th 2021                                      *
  * Author: Sean W.                                                            *
  * -----                                                                      *
- * Last Modified: Thu Apr 15 2021                                             * 
+ * Last Modified: Fri Apr 16 2021                                             * 
  * Modified By: Sean W.                                                       * 
  * -----                                                                      *
  * File: /senseBme.js                                                         *
@@ -95,12 +95,12 @@ const readOnce = () => {
   });
 };
 // Initialize the BME280 sensor
-// bme280
-//   .init()
-//   .then(() => {
-//     console.log("BME280 initialization succeeded");
-//     readSensorData();
-//   })
-//   .catch((err) => console.error(`BME280 initialization failed: ${err} `));
+bme280
+  .init()
+  .then(() => {
+    console.log("BME280 initialization succeeded");
+    readSensorData();
+  })
+  .catch((err) => console.error(`BME280 initialization failed: ${err} `));
 
 module.exports = { readOnce };
