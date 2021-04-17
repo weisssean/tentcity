@@ -2,7 +2,7 @@
  * Created Date: Tuesday April 13th 2021                                      *
  * Author: Sean W.                                                            *
  * -----                                                                      *
- * Last Modified: Fri Apr 16 2021                                             * 
+ * Last Modified: Sat Apr 17 2021                                             * 
  * Modified By: Sean W.                                                       * 
  * -----                                                                      *
  * File: /senseBme.js                                                         *
@@ -11,6 +11,7 @@
 
 const BME280 = require("bme280-sensor");
 
+let socket;
 // The BME280 constructor options are optional.
 //
 const options = {
@@ -20,28 +21,34 @@ const options = {
 
 let bme280;
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
 try {
   bme280 = new BME280(options);
 } catch (error) {
   bme280 = {
     init: () => {
       return new Promise((resolve, reject) => {
-        console.log("inited fake sensor")
+        console.log("inited fake sensor");
         resolve();
       });
     },
 
     readSensorData: () => {
       return new Promise((resolve, reject) => {
-        const data ={};
-        data.temperature_C = 20;
-        data.pressure_hPa = 21;
+        const data = {};
+        data.temperature_C =  getRandomInt(25,30);
+        data.pressure_hPa = getRandomInt(20,30);
+        data.humidity = getRandomInt(55,65);
 
         console.log(`data = ${JSON.stringify(data, null, 2)}`);
         resolve(data);
       });
     },
-
   };
 }
 
@@ -61,12 +68,15 @@ const readSensorData = () => {
       );
 
       console.log(`data = ${JSON.stringify(data, null, 2)}`);
+      if(socket){
+        socket.emit("cam_update", JSON.stringify(data, null, 2));
+        // ws.send(JSON.stringify(data, null, 2));
+      }
       setTimeout(readSensorData, 2000);
-      //send via websocket?
     })
     .catch((err) => {
       console.log(`BME280 read error1: ${err}`);
-      setTimeout(readSensorData, 2000);
+      setTimeout(readSensorData, 20000);
       //TODO: semd over websockets
     });
 };
@@ -95,12 +105,16 @@ const readOnce = () => {
   });
 };
 // Initialize the BME280 sensor
-bme280
-  .init()
-  .then(() => {
-    console.log("BME280 initialization succeeded");
-    readSensorData();
-  })
-  .catch((err) => console.error(`BME280 initialization failed: ${err} `));
 
-module.exports = { readOnce };
+const init = (_ws)=>{
+  socket = _ws
+  bme280
+    .init()
+    .then(() => {
+      console.log("BME280 initialization succeeded");
+      readSensorData();
+    })
+    .catch((err) => console.error(`BME280 initialization failed: ${err} `));
+}
+
+module.exports = { readOnce, init };

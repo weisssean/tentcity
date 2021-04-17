@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "cd client && npm run build",
     "start": "node ./bin/www "
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "node-dht-sensor": "^0.4.3"
+    "node-dht-sensor": "^0.4.3",
+    "socket.io": "^4.0.1"
   }
 }

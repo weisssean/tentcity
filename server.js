@@ -1,13 +1,12 @@
 require("dotenv").config();
 var createError = require("http-errors");
 var express = require("express");
-var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const path = require("path");
 
 var readOnce = require("./senseBME").readOnce;
 
-var indexRouter = require("./routes/index");
 
 var app = express();
 
@@ -21,13 +20,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
+
+app.use(express.static("client/html"));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/html", "index.html"));
+});
 
 app.get("/sensor", (req, res) => {
   // res.send('ok');
   readOnce()
     .then((sensorData) => {
-      console.log("Read DHT:",sensorData)
+      console.log("Read DHT:", sensorData);
       res.json(sensorData);
     })
     .catch((err) => {

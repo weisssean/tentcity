@@ -4,7 +4,7 @@
 # Created Date: Thursday April 15th 2021                                      # 
 # Author: Sean W.                                                             # 
 # -----                                                                       # 
-# Last Modified: Thu Apr 15 2021                                              # 
+# Last Modified: Sat Apr 17 2021                                              # 
 # Modified By: Sean W.                                                        # 
 # -----                                                                       # 
 # File: /senseDHT.py                                                          # 
@@ -36,19 +36,19 @@ while True:
         print(temperature_c)
         print(temperature_f)
         print(humidity)
-        # print(
-        #     "Temp: {:.1f} F / {:.1f} C    Humidity: {}% ".format(
-        #         temperature_f, temperature_c, humidity
-        #     )
-        # )
+        print(
+            "Temp: {:.1f} F / {:.1f} C    Humidity: {}% ".format(
+                temperature_f, temperature_c, humidity
+            )
+        )
  
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
-        time.sleep(3.0)
+        time.sleep(2.0)
         continue
     except Exception as error:
         dhtDevice.exit()
         raise error
  
-    time.sleep(3.0)
+    time.sleep(2.0)

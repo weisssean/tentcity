@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../server');
 var debug = require('debug')('tentcity:server');
 var http = require('http');
+const sensor = require("../senseBME");
+
 
 /**
  * Get port from environment and store in Express.
@@ -18,9 +20,46 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
+//  const webSocketsServerPort = 8000;
 
 var server = http.createServer(app);
 
+
+const io = require("socket.io")(server);
+
+/**
+Set up socket connection to listen to event hub changes
+*/
+io.on("connection", _socket => {
+  console.log("a user connected");
+  sensor.init(_socket)
+  // events.subscribe(_socket).catch(console.error);
+});
+
+io.on("disconnect", reason => {
+  console.log("socket disconnect", reason);
+  // close connection
+  // events.disconnect();
+});
+
+
+// const wss = new WebSocket.Server({ httpServer: server, noServer: true, port: 8080  });
+// server.listen(webSocketsServerPort);
+// const wsServer = new webSocketServer({
+//   httpServer: server
+// });
+
+
+// wss.on('connection', function connection(ws, request, client) {
+//   console.log("Server", ws) 
+//   console.log("Server", request) 
+//   console.log("Server", client) 
+//   console.log("Initializing sensor") 
+//   sensor.init(wss);
+//   wss.on('message', function message(msg) {
+//     console.log(`Received message ${msg} from user ${client}`);
+//   });
+// });
 /**
  * Listen on provided port, on all network interfaces.
  */
