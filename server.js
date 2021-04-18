@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "client/html", "index.html"));
 });
 
-app.get("/sensor", (req, res) => {
+app.get("/sensor", (req, res, next) => {
   // res.send('ok');
   readOnce()
     .then((sensorData) => {

@@ -72,7 +72,7 @@ const readSensorData = () => {
         socket.emit("cam_update", JSON.stringify(data, null, 2));
         // ws.send(JSON.stringify(data, null, 2));
       }
-      setTimeout(readSensorData, 2000);
+      setTimeout(readSensorData, 20000);
     })
     .catch((err) => {
       console.log(`BME280 read error1: ${err}`);

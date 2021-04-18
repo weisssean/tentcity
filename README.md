@@ -10,5 +10,13 @@ Install on rpi
 `sudo make install`
 
 
-## 2##
-`sudo npm install --unsafe-perm -g node-dht-sensor`
+
+## 2## on development machine
+`cd client`
+`npm run build`
+`scp -r html pi@rraspberry0:/home/pi/Documents/tentcity/client`
+
+## 3## on raspberry pi
+`sudo npm install --unsafe-perm`
+`npm start`
+<!-- `sudo npm install --unsafe-perm -g node-dht-sensor` -->

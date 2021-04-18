@@ -14,10 +14,15 @@ import { green } from "@material-ui/core/colors";
 
 import io from "socket.io-client";
 
-const host = "localhost:3002";
+// const host = window.location.hostname+"3002";
+// const address = `${
+//   window.location.origin.includes("localhost") ? "ws" : "wss"
+// }://${host /*window.location.host*/}`;
+
 const address = `${
-  window.location.origin.includes("localhost") ? "ws" : "wss"
-}://${host /*window.location.host*/}`;
+  "ws"
+}://${window.location.host /*window.location.host*/}`;
+
 
 // console.log("location", window.location)
 // const ws = new WebSocket('ws://192.168.1.184:8080');
