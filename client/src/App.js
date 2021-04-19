@@ -185,7 +185,7 @@ function App() {
         <iframe
           className="iframe"
           id="frm"
-          src={`http://${hostIp}:8088`}
+          src={`http://${hostIp}:8080`}
           scrolling="yes"
           height="100%"
           width="100%"
@@ -198,11 +198,11 @@ function App() {
           </div> */}
           <div className="column">
             <h1>{`Temperature: ${
-              tempF ? tempF : "---"
+              tempF ? parseInt(tempF) : "---"
             }°F`}</h1>
           </div>
           <div className="column">
-            <h1>{`Hunidity: ${humidity ? humidity : "---"}%`}</h1>
+            <h1>{`Hunidity: ${humidity ? parseInt(humidity) : "---"}%`}</h1>
           </div>
           {/* <div className="column">
               <h1>{`Pressure: ${pressure}%`}</h1>

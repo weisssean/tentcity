@@ -14,9 +14,19 @@ Install on rpi
 ## 2## on development machine
 `cd client`
 `npm run build`
-`scp -r html pi@rraspberry0:/home/pi/Documents/tentcity/client`
+`scp -r html pi@tent2:/home/pi/projects/tentcity/client`
 
 ## 3## on raspberry pi
 `sudo npm install --unsafe-perm`
 `npm start`
 <!-- `sudo npm install --unsafe-perm -g node-dht-sensor` -->
+
+
+
+
+i2cdetect -y 1
+
+
+pm2 start bin www
+pm2 save
+pm2 startup
