@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "cd client && npm run build",
-    "start": "node ./bin/www "
+    "start": "NODE_ENV=production node ./bin/www "
   },
   "dependencies": {
     "bme280-sensor": "^0.1.7",

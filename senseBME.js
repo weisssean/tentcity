@@ -2,7 +2,7 @@
  * Created Date: Tuesday April 13th 2021                                      *
  * Author: Sean W.                                                            *
  * -----                                                                      *
- * Last Modified: Sat Apr 17 2021                                             * 
+ * Last Modified: Wed May 05 2021                                             * 
  * Modified By: Sean W.                                                       * 
  * -----                                                                      *
  * File: /senseBme.js                                                         *
@@ -16,7 +16,7 @@ let socket;
 //
 const options = {
   i2cBusNo: 1, // defaults to 1
-  i2cAddress: BME280.BME280_DEFAULT_I2C_ADDRESS(), // defaults to 0x77
+  i2cAddress: 0x76// BME280.BME280_DEFAULT_I2C_ADDRESS(), // defaults to 0x77
 };
 
 let bme280;
