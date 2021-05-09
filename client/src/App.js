@@ -163,6 +163,7 @@ function App() {
 
   const hostIp = window.location.hostname //process.env.REACT_APP_DEVICE_IP_ADDRESS; //
 
+  const port = process.env.REACT_APP_CAMERA_PORT? process.env.REACT_APP_CAMERA_PORT:8088
   return (
     <>
       <div
@@ -185,7 +186,7 @@ function App() {
         <iframe
           className="iframe"
           id="frm"
-          src={`http://${hostIp}:8080`}
+          src={`http://${hostIp}:${port}`}
           scrolling="yes"
           height="100%"
           width="100%"
